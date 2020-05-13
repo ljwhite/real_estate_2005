@@ -1,3 +1,5 @@
+require '../lib/room'
+
 class House
 
   attr_reader :price, :address, :rooms, :details
@@ -36,7 +38,15 @@ class House
   end
 
   def details
-    {"price" => @price, "address" => @address}
+    @details = {"price" => @price, "address" => @address}
+  end
+
+  def price_per_square_foot
+    (self.price / self.area.to_f).round(2)
+  end
+
+  def rooms_sorted_by_area
+    self.rooms.sort_by {|room| room.area }
   end
 
 end
